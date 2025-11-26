@@ -15,4 +15,3 @@ dependencies:
       - earthkit-geo
       - kaleido
       - h3
-      - rasterio
