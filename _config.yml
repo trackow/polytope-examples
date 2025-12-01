@@ -1,20 +1,20 @@
-title : Polytope Examples for DT Data Access
+title: Polytope Examples for DT Data Access
 author: Adam Warde, James Hawkes, Alice Sartori Monteiro de Barros and Tiago Quintino
-logo: 'docs/images/Logo_Destination_Earth_Colours.png'
+logo: "docs/images/Logo_Destination_Earth_Colours.png"
 
 # Short description about the book
 description: >-
   Guides to accessing Destination Earth DT data via the Polytope web service hosted on the LUMI Databridge.
 
 execute:
-  execute_notebooks           : off
+  execute_notebooks: off
 
 # HTML-specific settings
 html:
-  home_page_in_navbar         : true
+  home_page_in_navbar: true
 
 # Interact link settings
-notebook_interface            : "notebook"
+notebook_interface: "notebook"
 
 # MyST parser settings
 parse:
@@ -25,17 +25,18 @@ parse:
 
 # Launch button settings
 repository:
-  url                         : https://github.com/destination-earth-digital-twins/polytope-examples
-  path_to_book                : ""
+  url: https://github.com/destination-earth-digital-twins/polytope-examples
+  path_to_book: ""
 
 binder:
-  binderhub_url               : "https://code.insula.destine.eu"
-  text                        : "Launch DestinE Insula (requires login)"
+  binderhub_url: "https://code.insula.destine.eu"
+  text: "Launch DestinE Insula (requires login)"
 
 # Sitemap
 sphinx:
   config:
-    html_baseurl            : "https://destination-earth-digital-twins.github.io/polytope-examples/"
-    sitemap_url_scheme      : "{link}"
+    html_baseurl: "https://destination-earth-digital-twins.github.io/polytope-examples/"
+    sitemap_url_scheme: "{link}"
+    epub_show_urls: "no"
   extra_extensions:
     - sphinx_sitemap
