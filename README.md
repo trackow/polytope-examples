@@ -1,12 +1,15 @@
-<h3 align="center">
-<img src="./docs/images/Logo_Destination_Earth_Colours.png" width=60%>
-</br>
+<img src="./docs/images/Logo_Destination_Earth_Colours.png" width=60% >
 
-</h3>
+<br /><br />
+
+# Polytope Examples for DT Data Access
 
 - [Polytope Examples for DT Data Access](#polytope-examples-for-dt-data-access)
   - [Access using your Destination Earth Service Platform credentials](#access-using-your-destination-earth-service-platform-credentials)
   - [Installation](#installation)
+    - [Option 1: Conda Instructions](#option-1-conda-instructions)
+    - [Option 2: Python Virtual Environment (venv)](#option-2-python-virtual-environment-venv)
+  - [Data Locations](#data-locations)
   - [Climate-DT Examples](#climate-dt-examples)
   - [Extremes-DT Examples](#extremes-dt-examples)
   - [On-Demand Extremes-DT Examples](#on-demand-extremes-dt-examples)
@@ -14,18 +17,21 @@
   - [Polytope Quota Limits for DestinE](#polytope-quota-limits-for-destine)
 
 
-# Polytope Examples for DT Data Access
-
 ## Access using your Destination Earth Service Platform credentials
 
 This repository describes the process for accessing Destination Earth DT data via the Polytope web service hosted on the LUMI Databridge.
 
-1. Install polytope-client from PyPI:
+1. Clone the repo locally or if using polytope via Insula `cd` into the polytope directory.
+```
+git clone git@github.com:destination-earth-digital-twins/polytope-examples.git
+```
+
+2. Install polytope-client from PyPI:
 ```
 pip install --upgrade polytope-client
 ```
 
-2. Retrieve a token from the Destination Earth Service Platform (DESP) by running the script included in this repository:
+3. Retrieve a token from the Destination Earth Service Platform (DESP) by running the script included in this repository:
 ```
 python desp-authentication.py -u <username> -p <password>
 # see --help for more options
@@ -46,9 +52,17 @@ The script automatically places your token in `~/.polytopeapirc` where the clien
 
 3. Run the example scripts in this repostory to download data, and customise them as you wish.
 
-## Installation 
+## Installation
 
-To run the notebooks you can use the `environment.yml` file provided to create a conda environment that can run the notebooks. The following commands create the environment and also create an ipykernel called `earthkit` than can be used in notebooks if selected.
+You can run the notebooks by setting up an appropriate environment using one of the following options:
+
+* Option 1: Use the `environment.yml` file to create a Conda environment, or
+
+* Option 2: Use the `requirements.txt` file to set up a Python virtual environment.
+
+After creating the environment, the provided commands will also register an IPython kernel named earthkit, which you can select when working with the notebooks.
+
+### Option 1: Conda Instructions
 
 ```
 envname=earthkit
@@ -59,6 +73,28 @@ conda activate $envname
 # set earthkit environment to the default used by ipykernels
 python3 -m ipykernel install --user --name=$envname
 ```
+
+### Option 2: Python Virtual Environment (venv)
+
+```
+envname=earthkit
+
+# Create a virtual environment
+python3 -m venv $envname
+
+# Activate it
+source $envname/bin/activate      # macOS/Linux
+
+# Install dependencies
+pip install -r requirements.txt
+
+# If using Jupyter notebooks, register your environment as a kernel for ipykernel
+python3 -m ipykernel install --user --name=$envname
+```
+
+## Data Locations
+
+Data can be found on both LUMI and MN5, to access data on either change the `address` argument in `earthkit.data.from_source()` to either `polytope.mn5.apps.dte.destination-earth.eu` for MN5 or `polytope.lumi.apps.dte.destination-earth.eu` for LUMI.
 
 ## Climate-DT Examples
 
@@ -88,6 +124,8 @@ python3 -m ipykernel install --user --name=$envname
 - [On-Demand Extremes DT Example Directory](on-demand-extremes-dt)
   - [On-Demand Extremes DT python Script](on-demand-extremes-dt/on-demand-extremes-dt-example.py)
   - [On-Demand Extremes DT notebook example](on-demand-extremes-dt/on-demand-extremes-dt-example.ipynb)
+  - [On-Demand Extremes DT feature extraction country example](on-demand-extremes-dt/on-demand-country-fe-example.ipynb)
+  - [On-Demand Extremes DT feature extraction trajectory example](on-demand-extremes-dt/on-demand-trajectory-fe-example.ipynb)
 
 ## NextGEMS Examples
 
