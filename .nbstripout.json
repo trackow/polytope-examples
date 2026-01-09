@@ -1,3 +1,4 @@
-// {
-//   "strip_output_tags": ["no-output"]
-// }
+{
+  "strip_output": false,
+  "strip_output_tags": ["no-output"]
+}
