@@ -3,4 +3,3 @@ repos:
     rev: 0.6.1
     hooks:
       - id: nbstripout
-        args: ["--extra-keys=cell.metadata.tags"]
