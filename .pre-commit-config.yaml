@@ -5,4 +5,6 @@ repos:
       - id: nbstripout
         args:
           - --keep-output
-          - --strip-output-tags=no-output
+          - --drop-output-type error stream
+          # - --keep-output
+          # - --strip-output-tags=no-output
