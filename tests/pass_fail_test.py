@@ -24,6 +24,7 @@ def collect_notebooks():
 
 NOTEBOOKS = collect_notebooks()
 
+
 @pytest.mark.parametrize(
     "notebook_path",
     NOTEBOOKS,
