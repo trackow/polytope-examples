@@ -6,7 +6,3 @@ repos:
         args:
           - --drop-output-type error
           - --drop-output-type stream
-          # - --keep-output
-          # - --drop-output-type error stream
-          # - --keep-output
-          # - --strip-output-tags=no-output
