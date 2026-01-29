@@ -6,13 +6,14 @@ from pathlib import Path, PosixPath
 
 HERE = Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent
-
-# Add as many notebook roots as you want here
+SKIP_NOTEBOOKS = {
+    PROJECT_ROOT / "climate-dt/climate-dt-train-ai-timeseries-polytope.ipynb",
+    }
 NOTEBOOK_ROOTS = [
-    # PROJECT_ROOT / "climate-dt",
+    PROJECT_ROOT / "climate-dt",
     PROJECT_ROOT / "extremes-dt",
-    # PROJECT_ROOT / "on-demand-extremes-dt",
-        # PROJECT_ROOT / "nextgems",
+    PROJECT_ROOT / "on-demand-extremes-dt",
+    PROJECT_ROOT / "nextgems",
 
 ]
 
@@ -21,7 +22,6 @@ def collect_notebooks():
     for root in NOTEBOOK_ROOTS:
         notebooks.extend(root.rglob("*.ipynb"))
     return notebooks
-    # return [PosixPath('/Users/maes/Documents/Repos/MAINTAINED/polytope-examples/climate-dt/climate-dt-earthkit-fe-polygon.ipynb')]
 
 NOTEBOOKS = collect_notebooks()
 
@@ -32,7 +32,13 @@ NOTEBOOKS = collect_notebooks()
     ids=lambda p: str(p.relative_to(PROJECT_ROOT)),
 )
 @pytest.mark.timeout(600)
-def test_notebook_execution(notebook_path):
+def test_notebook_execution(notebook_path, monkeypatch):
+    if notebook_path in SKIP_NOTEBOOKS:
+        # import pdb; pdb.set_trace()
+        pytest.skip("Notebook skipped by test configuration")
+
+    monkeypatch.setenv("LIVE_REQUEST", "false")
+
     nb = nbformat.read(notebook_path, as_version=4)
     client = NotebookClient(
         nb,
