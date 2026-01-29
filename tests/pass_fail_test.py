@@ -2,7 +2,7 @@ import nbformat
 import pytest
 from nbclient import NotebookClient
 from nbclient.exceptions import CellExecutionError
-from pathlib import Path
+from pathlib import Path, PosixPath
 
 HERE = Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent
@@ -10,8 +10,8 @@ PROJECT_ROOT = HERE.parent
 # Add as many notebook roots as you want here
 NOTEBOOK_ROOTS = [
     # PROJECT_ROOT / "climate-dt",
-    # PROJECT_ROOT / "extremes-dt",
-    PROJECT_ROOT / "on-demand-extremes-dt",
+    PROJECT_ROOT / "extremes-dt",
+    # PROJECT_ROOT / "on-demand-extremes-dt",
         # PROJECT_ROOT / "nextgems",
 
 ]
@@ -21,6 +21,7 @@ def collect_notebooks():
     for root in NOTEBOOK_ROOTS:
         notebooks.extend(root.rglob("*.ipynb"))
     return notebooks
+    # return [PosixPath('/Users/maes/Documents/Repos/MAINTAINED/polytope-examples/climate-dt/climate-dt-earthkit-fe-polygon.ipynb')]
 
 NOTEBOOKS = collect_notebooks()
 
