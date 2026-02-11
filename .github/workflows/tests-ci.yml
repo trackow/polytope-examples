@@ -1,0 +1,36 @@
+name: Notebook Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - notebook-tests
+
+jobs:
+  test-notebooks:
+    runs-on: ubuntu-latest
+
+    env:
+      LIVE_REQUEST: "false"
+
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Run notebook tests
+        run: |
+          pytest -v

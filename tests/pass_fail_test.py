@@ -6,15 +6,16 @@ from pathlib import Path, PosixPath
 
 HERE = Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent
+
 SKIP_NOTEBOOKS = {
     PROJECT_ROOT / "climate-dt/climate-dt-train-ai-timeseries-polytope.ipynb",
     }
+
 NOTEBOOK_ROOTS = [
     PROJECT_ROOT / "climate-dt",
     PROJECT_ROOT / "extremes-dt",
     PROJECT_ROOT / "on-demand-extremes-dt",
     PROJECT_ROOT / "nextgems",
-
 ]
 
 def collect_notebooks():

@@ -18,3 +18,4 @@ healpy
 kaleido
 h3
 rasterio
+ipykernel
