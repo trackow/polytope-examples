@@ -63,7 +63,7 @@ jobs:
       - name: Run full notebook suite (PR)
         if: github.event_name == 'pull_request'
         run: |
-          pytest -v tests/test_notebooks.py
+          pytest -v tests/pass_fail_test.py
 
       # -------------------------------------------------
       # Run ONLY changed notebooks on push
