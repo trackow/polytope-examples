@@ -11,3 +11,4 @@ kaleido
 lxml
 h3
 rasterio
+rioxarray
