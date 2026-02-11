@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - notebook-tests
 
   push:
     branches:
