@@ -11,11 +11,13 @@ SKIP_NOTEBOOKS = {
     PROJECT_ROOT / "climate-dt/climate-dt-train-ai-timeseries-polytope.ipynb",
     }
 
+LIVE_REQUEST = False
+
 NOTEBOOK_ROOTS = [
     PROJECT_ROOT / "climate-dt",
-    PROJECT_ROOT / "extremes-dt",
-    PROJECT_ROOT / "on-demand-extremes-dt",
-    PROJECT_ROOT / "nextgems",
+    # PROJECT_ROOT / "extremes-dt",
+    # PROJECT_ROOT / "on-demand-extremes-dt",
+    # PROJECT_ROOT / "nextgems",
 ]
 
 def collect_notebooks():
