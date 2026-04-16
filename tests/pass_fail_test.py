@@ -20,7 +20,7 @@ NOTEBOOK_ROOTS = [
 ]
 
 SKIP_NOTEBOOKS = {
-    PROJECT_ROOT / "climate-dt/climate-dt-train-ai-timeseries-polytope.ipynb",
+    PROJECT_ROOT / "climate-dt/full-field-post-processing/climate-dt-train-ai-timeseries-polytope.ipynb",
 }
 
 
