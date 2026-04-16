@@ -14,7 +14,6 @@
   - [Extremes-DT Examples](#extremes-dt-examples)
   - [On-Demand Extremes-DT Examples](#on-demand-extremes-dt-examples)
   - [NextGEMS Examples](#nextgems-examples)
-  - [Climate-DT xarray Catalogue](#climate-dt-xarray-catalogue)
   - [Polytope Quota Limits for DestinE](#polytope-quota-limits-for-destine)
 
 
@@ -174,10 +173,6 @@ Data can be found on both LUMI and MN5, to access data on either change the `add
     - [NextGEMS historical feature extraction vertical profile](nextgems/feature-extraction/nextGEMS-historical-fe-verticalprofile-example.ipynb)
     - [NextGEMS historical feature extraction bounding box](nextgems/feature-extraction/nextGEMS-historical-fe-boundingbox-example.ipynb)
     - [NextGEMS historical feature extraction country](nextgems/feature-extraction/nextGEMS-historical-fe-country-example.ipynb)
-
-## Climate-DT xarray Catalogue
-
-For an xarray-based catalogue view of the Climate-DT data, see the [polytope-climatedt-catalogue](polytope-climatedt-catalogue/README.md) sub-directory. This provides tools to lazily browse the full Climate-DT portfolio as xarray datasets without downloading data upfront.
 
 ## Polytope Documentation
 
