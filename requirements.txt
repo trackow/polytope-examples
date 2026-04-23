@@ -15,3 +15,13 @@ requests
 rioxarray
 scikit-learn
 xgboost
+conflator
+matplotlib
+numpy
+xarray
+pandas
+netcdf4
+ipykernel
+cartopy
+zarr>=2.18,<3
+numcodecs<0.16
