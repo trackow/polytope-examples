@@ -11,6 +11,10 @@
     - [Option 2: Python Virtual Environment (venv)](#option-2-python-virtual-environment-venv)
   - [Data Locations](#data-locations)
   - [Climate-DT Examples](#climate-dt-examples)
+    - [Full Field](#full-field)
+    - [Full Field Post-Processing](#full-field-post-processing)
+    - [Feature Extraction](#feature-extraction)
+    - [Polytope Explorer](#polytope-explorer)
   - [Extremes-DT Examples](#extremes-dt-examples)
   - [On-Demand Extremes-DT Examples](#on-demand-extremes-dt-examples)
   - [NextGEMS Examples](#nextgems-examples)
@@ -98,33 +102,62 @@ Data can be found on both LUMI and MN5, to access data on either change the `add
 
 ## Climate-DT Examples
 
-- [Climate DT Example Directory](climate-dt)
-  - **Full Field**
-    - [Climate DT python Script](climate-dt/full-field/climate-dt.py)
-    - [Climate DT notebook example](climate-dt/full-field/climate-dt-earthkit-example.ipynb)
-    - [Climate DT notebook domain example](climate-dt/full-field/climate-dt-earthkit-example-domain.ipynb)
-    - [Climate DT notebook area example](climate-dt/full-field/climate-dt-earthkit-area-example.ipynb)
-    - [Climate DT notebook area of interest example](climate-dt/full-field/climate-dt-earthkit-aoi-example.ipynb)
-    - [Climate DT notebook grid example](climate-dt/full-field/climate-dt-earthkit-grid-example.ipynb)
-    - [Climate DT notebook healpix data](climate-dt/full-field/climate-dt-healpix-data.ipynb)
-    - [Climate DT notebook healpix ocean](climate-dt/full-field/climate-dt-healpix-ocean-example.ipynb)
-    - [Climate DT notebook HighResMIP example](climate-dt/full-field/climate-dt-highresmip-earthkit-example.ipynb)
-    - [Climate DT MN5 notebook example](climate-dt/full-field/climate-dt-earthkit-MN5-example.ipynb)
-    - [Climate DT MN5 monthly means notebook example](climate-dt/full-field/climate-dt-earthkit-MN5-monthly-mean-example.ipynb)
-  - **Full Field Post-Processing**
-    - [Climate DT notebook healpix interpolation](climate-dt/full-field-post-processing/climate-dt-earthkit-healpix-interpolate.ipynb)
-    - [Climate DT notebook serverside interpolation](climate-dt/full-field-post-processing/climate-dt-earthkit-serverside-interpolation.ipynb)
-    - [Climate DT notebook GeoTIFF export](climate-dt/full-field-post-processing/climate-dt-earthkit-geotiff.ipynb)
-    - [Climate DT AI timeseries notebook](climate-dt/full-field-post-processing/climate-dt-train-ai-timeseries-polytope.ipynb)
-  - **Feature Extraction**
-    - [Climate DT notebook feature extraction timeseries](climate-dt/feature-extraction/climate-dt-earthkit-fe-timeseries.ipynb)
-    - [Climate DT notebook feature extraction trajectory](climate-dt/feature-extraction/climate-dt-earthkit-fe-trajectory.ipynb)
-    - [Climate DT notebook feature extraction vertical profile](climate-dt/feature-extraction/climate-dt-earthkit-fe-verticalprofile.ipynb)
-    - [Climate DT notebook feature extraction bounding box](climate-dt/feature-extraction/climate-dt-earthkit-fe-boundingbox.ipynb)
-    - [Climate DT notebook feature extraction country](climate-dt/feature-extraction/climate-dt-earthkit-fe-country.ipynb)
-    - [Climate DT notebook feature extraction polygon](climate-dt/feature-extraction/climate-dt-earthkit-fe-polygon.ipynb)
-    - [Climate DT notebook feature extraction pcolormesh](climate-dt/feature-extraction/climate-dt-earthkit-fe-pcolormesh.ipynb)
-    - [Climate DT notebook feature extraction nudging story](climate-dt/feature-extraction/climate-dt-earthkit-fe-story-nudging.ipynb)
+- [Climate DT Example Directory](climate-dt) — see also the [Climate DT README](climate-dt/README.md) for full details on available data and variables.
+
+```
+climate-dt/
+├── full-field/                  # Retrieve and visualise complete global or regional fields
+├── full-field-post-processing/  # Apply server-side or client-side post-processing to retrieved fields
+├── feature-extraction/          # Extract specific spatial or temporal features from the datacube
+└── polytope-explorer/           # Browse the Climate DT data portfolio lazily without downloading upfront
+```
+
+### Full Field
+
+Polytope allows users to download complete global or regional fields from the Climate DT. Full field requests return GRIB data using standard MARS keys. Server-side options such as `grid` (interpolation to a target grid) and `area` (geographic subselection) can be applied at request time to reduce data volume before download. See the [Polytope full fields documentation](https://polytope.readthedocs.io/en/latest/Service/Full_fields/) for more details.
+
+- [Climate DT python Script](climate-dt/full-field/climate-dt.py)
+- [Climate DT notebook example](climate-dt/full-field/climate-dt-earthkit-example.ipynb)
+- [Climate DT notebook domain example](climate-dt/full-field/climate-dt-earthkit-example-domain.ipynb)
+- [Climate DT notebook area example](climate-dt/full-field/climate-dt-earthkit-area-example.ipynb)
+- [Climate DT notebook area of interest example](climate-dt/full-field/climate-dt-earthkit-aoi-example.ipynb)
+- [Climate DT notebook grid example](climate-dt/full-field/climate-dt-earthkit-grid-example.ipynb)
+- [Climate DT notebook healpix data](climate-dt/full-field/climate-dt-healpix-data.ipynb)
+- [Climate DT notebook healpix ocean](climate-dt/full-field/climate-dt-healpix-ocean-example.ipynb)
+- [Climate DT notebook HighResMIP example](climate-dt/full-field/climate-dt-highresmip-earthkit-example.ipynb)
+- [Climate DT MN5 notebook example](climate-dt/full-field/climate-dt-earthkit-MN5-example.ipynb)
+- [Climate DT MN5 monthly means notebook example](climate-dt/full-field/climate-dt-earthkit-MN5-monthly-mean-example.ipynb)
+
+### Full Field Post-Processing
+
+These notebooks demonstrate server-side and client-side post-processing of retrieved fields, including grid interpolation, format conversion, and use of the data for AI model training.
+
+- [Climate DT notebook healpix interpolation](climate-dt/full-field-post-processing/climate-dt-earthkit-healpix-interpolate.ipynb)
+- [Climate DT notebook serverside interpolation](climate-dt/full-field-post-processing/climate-dt-earthkit-serverside-interpolation.ipynb)
+- [Climate DT notebook GeoTIFF export](climate-dt/full-field-post-processing/climate-dt-earthkit-geotiff.ipynb)
+- [Climate DT AI timeseries notebook](climate-dt/full-field-post-processing/climate-dt-train-ai-timeseries-polytope.ipynb)
+
+### Feature Extraction
+
+Polytope feature extraction reads only the user-requested data rather than whole fields, which significantly reduces I/O. Features are n-dimensional shapes (polytopes) cut from the datacube — such as time series at a point, vertical profiles, trajectories, bounding boxes, and polygons. See the [Polytope feature extraction documentation](https://polytope.readthedocs.io/en/latest/Service/Features/feature/) for more details.
+
+- [Climate DT notebook feature extraction timeseries](climate-dt/feature-extraction/climate-dt-earthkit-fe-timeseries.ipynb)
+- [Climate DT notebook feature extraction trajectory](climate-dt/feature-extraction/climate-dt-earthkit-fe-trajectory.ipynb)
+- [Climate DT notebook feature extraction vertical profile](climate-dt/feature-extraction/climate-dt-earthkit-fe-verticalprofile.ipynb)
+- [Climate DT notebook feature extraction bounding box](climate-dt/feature-extraction/climate-dt-earthkit-fe-boundingbox.ipynb)
+- [Climate DT notebook feature extraction country](climate-dt/feature-extraction/climate-dt-earthkit-fe-country.ipynb)
+- [Climate DT notebook feature extraction polygon](climate-dt/feature-extraction/climate-dt-earthkit-fe-polygon.ipynb)
+- [Climate DT notebook feature extraction pcolormesh](climate-dt/feature-extraction/climate-dt-earthkit-fe-pcolormesh.ipynb)
+- [Climate DT notebook feature extraction nudging story](climate-dt/feature-extraction/climate-dt-earthkit-fe-story-nudging.ipynb)
+
+### Polytope Explorer
+
+The Polytope Explorer notebooks allow you to lazily browse the full Climate DT data portfolio without downloading any data upfront. They expose the datacube as a virtual [zarr](https://zarr.readthedocs.io/) store backed by Polytope, so you can inspect available variables, perform climate change analysis over multi-decadal periods, and generate ready-to-use request snippets — only fetching the data chunks you actually need.
+
+- [Climate DT lazy portfolio browser (monthly)](climate-dt/polytope-explorer/03_lazy_browse_portfolio.ipynb)
+- [Climate DT lazy portfolio browser (hourly)](climate-dt/polytope-explorer/04_lazy_browse_portfolio_hourly.ipynb)
+- [Climate DT climate change analysis](climate-dt/polytope-explorer/02_climate_change_destine.ipynb)
+- [Climate DT variable lookup](climate-dt/polytope-explorer/05_variable_lookup.ipynb)
 
 ## Extremes-DT Examples
 
