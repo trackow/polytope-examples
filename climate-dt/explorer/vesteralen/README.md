@@ -53,6 +53,9 @@ The settings shared by all scripts (box, outline, Sortland coordinates, model, d
 the northern and western part of Hinnøya, so it is approximate. To use all of Norway instead,
 replace `SHAPES` with `earthkit.geo.cartography.country_polygons(["Norway"], resolution=50e6)`.
 
+All requests use the high-resolution store (nside 1024, about 4.4 km). The notebooks use
+standard resolution for some cells; the scripts never do.
+
 Default cases (same as the notebooks):
 
 - monthly: IFS-FESOM, `avg_2t`, June 2010 (timeseries: all of 2010)
@@ -76,8 +79,7 @@ detail.
 
 ![area, monthly](plots/vesteralen_area_regridded_monthly.png)
 
-**Point timeseries (Sortland).** These requests use the standard-resolution store, the same
-as the notebooks.
+**Point timeseries (Sortland).** The value of the high-resolution cell at Sortland.
 
 ![point, monthly](plots/vesteralen_point_timeseries_monthly.png)
 
@@ -91,14 +93,14 @@ These are first impressions from single dates, not a proper evaluation.
 - **The land–sea contrast in winter is strong.** At noon on 1 January 2014 (ICON), the open
   sea west of the islands is at about 271–272 K. Inland on Langøya and Hinnøya it drops to
   about 249 K (−24 °C). Andøya and the outer coast are somewhere in between.
-- **Point values depend on the resolution.** At Sortland on the same day, IFS-NEMO at
-  standard resolution gives 274–278.6 K, well above zero. A standard-resolution cell is about
-  50 km across and here it is mostly sea, so the point series looks maritime even where the
-  high-resolution land cells are far below zero. For anything local, the high-resolution
-  store is needed. Part of the gap is also simply a different model.
-- **The seasonal cycle at Sortland** (IFS-FESOM 2010, monthly means) runs from about 268 K in
-  February to 283 K in July, roughly −5 °C to +10 °C. That fits the mild, maritime climate up
-  there.
+- **Sortland stays mild in IFS-NEMO.** On 1–2 January 2014, IFS-NEMO gives 271.5–277.5 K at
+  Sortland, so mostly just above freezing. Sortland is on the coast, but the gap to ICON's cold
+  inland cells on the same day is large. It's worth comparing the models at the same point
+  before reading much into it.
+- **The seasonal cycle at Sortland** (IFS-FESOM 2010, monthly means) runs from about 263.5 K in
+  February to 284 K in July, roughly −10 °C to +11 °C. As a quick check, the standard-resolution
+  store gives a noticeably flatter cycle there, about 268–283 K, because its ~50 km cell is
+  mostly sea.
 
 ## Notes
 

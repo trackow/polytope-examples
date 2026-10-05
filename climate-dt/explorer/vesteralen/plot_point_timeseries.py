@@ -6,8 +6,7 @@ from vesteralen_common import POINT, POINT_NAME, REGION, open_store, parse_args,
 
 args = parse_args(__doc__)
 cfg = args.cfg
-# The notebooks take point timeseries from the standard-resolution store
-store, ds = open_store(args.freq, resolution="standard")
+store, ds = open_store(args.freq)
 
 ts_result = ds[cfg["var"]].polytope.sel(model=cfg["ts_model"], time=cfg["ts_time"], point=POINT)
 

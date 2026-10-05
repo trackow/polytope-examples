@@ -70,9 +70,10 @@ def parse_args(description):
     return args
 
 
-def open_store(freq, resolution="high"):
+def open_store(freq):
+    # always the high-resolution store (nside 1024, ~4.4 km)
     kwargs = dict(models=["ICON", "IFS-FESOM", "IFS-NEMO"], experiment="hist",
-                  resolution=resolution, levtype="sfc")
+                  resolution="high", levtype="sfc")
     if freq == "hourly":
         kwargs.update(frequency="hourly", start_date="1990-01-01T00:00:00",
                       end_date="2014-12-31T23:00:00")
