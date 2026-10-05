@@ -180,6 +180,12 @@ First check: on 2014-01-15 the SST off Vesterålen is 276.3–280.8 K (about 3�
 The script prints the dataset summary first, which lists the variable names, so it also
 works as a quick access check.
 
+## Marine heatwave, August 2024
+
+Storyline analysis of the August 2024 heatwave off Lofoten and Vesterålen (pre-industrial,
+present day and +2 K), set up like Fig. 1 of Gonzalez et al. (2025). Scripts are `mhw_*.py`
+and `run_mhw2024.sh`. The exact requests and the first results are in [MHW2024.md](MHW2024.md).
+
 ## Notes
 
 - The scripts import `polytope_zarr` from the parent folder, so keep them inside
