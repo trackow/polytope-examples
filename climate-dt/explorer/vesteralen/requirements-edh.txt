@@ -1,0 +1,10 @@
+# EarthDataHub example only (edh_ocean_nemo.py) — needs zarr v3, the Polytope venv pins zarr<3
+zarr>=3
+xarray
+dask
+fsspec
+aiohttp
+requests
+cartopy
+matplotlib
+shapely

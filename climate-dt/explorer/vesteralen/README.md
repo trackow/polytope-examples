@@ -127,6 +127,59 @@ observations yet.
   artefact of the HEALPix → 0.05° regridding rather than anything physical, but this hasn't
   been checked yet.
 
+## EarthDataHub (ocean, IFS-NEMO)
+
+`edh_ocean_nemo.py` reads the same Climate DT run from
+[EarthDataHub](https://earthdatahub.destine.eu/collections/climate-dt-2/datasets/IFS-NEMO-hist-o2d-daily-high)
+instead of Polytope. The data are daily ocean and sea-ice fields for 1990–2014, already
+regridded from HEALPix to a regular ~0.04° lat/lon grid and stored as Zarr v3. xarray opens
+the store lazily and only downloads the chunks covering Vesterålen.
+
+The script has its own venv, because EarthDataHub needs `zarr>=3` and the Polytope stack is
+pinned to `zarr<3`:
+
+```bash
+python3 -m venv .venv-edh                       # in the repository root
+.venv-edh/bin/pip install -r climate-dt/explorer/vesteralen/requirements-edh.txt
+```
+
+**API key.** EarthDataHub doesn't use the Polytope key from `~/.polytopeapirc`. Log in to
+the DestinE platform and go to "Quota & API Keys", where you can copy the default key or
+create a new one. Then do either of these:
+
+```bash
+export EDH_API_KEY=<your key>
+```
+
+or add it to `~/.netrc` (and `chmod 600 ~/.netrc`):
+
+```
+machine api.earthdatahub.destine.eu
+    login edh
+    password <your key>
+
+machine data.earthdatahub.destine.eu
+    login edh
+    password <your key>
+```
+
+The key has a quota of 500,000 requests a month. A small area like this one only needs a
+handful.
+
+```bash
+cd climate-dt/explorer/vesteralen
+../../../.venv-edh/bin/python edh_ocean_nemo.py                       # SST (avg_tos), 2014-01-15
+../../../.venv-edh/bin/python edh_ocean_nemo.py --var avg_siconc --date 2010-03-15
+```
+
+First check: on 2014-01-15 the SST off Vesterålen is 276.3–280.8 K (about 3–8 °C) on a
+25 × 63 grid. The full store is about 15 TB, but only the chunks covering the box are read.
+
+![EDH SST](plots/vesteralen_edh_nemo_avg_tos.png)
+
+The script prints the dataset summary first, which lists the variable names, so it also
+works as a quick access check.
+
 ## Notes
 
 - The scripts import `polytope_zarr` from the parent folder, so keep them inside
