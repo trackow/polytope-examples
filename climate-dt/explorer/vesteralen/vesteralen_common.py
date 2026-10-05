@@ -49,6 +49,8 @@ SHAPES = [[
     (68.70, 13.90), (68.45, 13.90),
 ]]
 
+MODELS = ["ICON", "IFS-FESOM", "IFS-NEMO"]
+
 # ── Per-frequency request settings (as in notebooks 03 / 04) ──────
 CONFIG = {
     "monthly": dict(var="avg_2t", model="IFS-FESOM", time="2010-06", label="Jun 2010",
@@ -70,15 +72,16 @@ def parse_args(description):
     return args
 
 
-def open_store(freq):
+def open_store(freq, **extra):
     # always the high-resolution store (nside 1024, ~4.4 km)
-    kwargs = dict(models=["ICON", "IFS-FESOM", "IFS-NEMO"], experiment="hist",
+    kwargs = dict(models=MODELS, experiment="hist",
                   resolution="high", levtype="sfc")
     if freq == "hourly":
         kwargs.update(frequency="hourly", start_date="1990-01-01T00:00:00",
                       end_date="2014-12-31T23:00:00")
     else:
         kwargs.update(years=range(1990, 2015))
+    kwargs.update(extra)
     store = PolytopeZarrStore.from_climate_dt(**kwargs)
     return store, store.open()
 
@@ -96,6 +99,17 @@ def finish_map(ax):
     gl = ax.gridlines(draw_labels=True, linewidth=0.3, alpha=0.5)
     gl.top_labels = False
     gl.right_labels = False
+
+
+def land_mask(lons, lats):
+    """True where (lon, lat) grid points fall on Natural Earth 10m land."""
+    import shapely
+    from shapely.geometry import box
+    lon0, lon1, lat0, lat1 = EXTENT
+    land = shapely.union_all([g for g in cfeature.LAND.with_scale("10m").geometries()
+                              if g.intersects(box(lon0, lat0, lon1, lat1))])
+    lon2d, lat2d = np.meshgrid(lons, lats)
+    return shapely.contains_xy(land, lon2d, lat2d)
 
 
 def plot_healpix_cells(result, var, nside, title, outfile, shapes=None):
@@ -127,10 +141,11 @@ def plot_healpix_cells(result, var, nside, title, outfile, shapes=None):
     print(f"{len(values)} HEALPix cells, {np.nanmin(values):.1f}–{np.nanmax(values):.1f} K")
 
 
-def save(fig, name):
+def save(fig, name, tight=True):
     OUT_DIR.mkdir(exist_ok=True)
     path = OUT_DIR / name
-    fig.tight_layout()
+    if tight:
+        fig.tight_layout()
     fig.savefig(path, dpi=150)
     plt.close(fig)
     print(f"saved {path}")
