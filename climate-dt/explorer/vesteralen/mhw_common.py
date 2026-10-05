@@ -55,12 +55,19 @@ SYSTEM_BANDS = {
 }
 
 
-def open_storyline(levtype):
-    """Storyline store, high resolution (nside 512 output), June-October 2024."""
+def open_storyline(levtype, hours=None):
+    """Storyline store, high resolution (nside 512 output), June-October 2024.
+
+    hours: e.g. [0, 6, 12, 18] to request only those hours from hourly fields. The storyline
+    path of from_climate_dt doesn't take filter_hours, so it is set on the store directly
+    (area and point requests read it from there).
+    """
     store = PolytopeZarrStore.from_climate_dt(
         models=["IFS-FESOM"], experiment=CLIMATES, activity="story-nudging",
         levtype=levtype, frequency="hourly", resolution="high",
         start_date="2024-06-01", end_date="2024-10-31")
+    if hours is not None:
+        store._filter_hours = hours
     return store, store.open()
 
 
@@ -76,7 +83,7 @@ def _cached(name, fetch):
     return da
 
 
-def area_field(ds, var, climate, time, area, level=None, tag=""):
+def area_field(ds, var, climate, time, area, level=None, tag="", grid=GRID):
     """Server-side regridded field (area + grid), cached."""
     lev = f"_L{level}" if level else ""
     t = f"{time.start}_{time.stop}" if isinstance(time, slice) else time
@@ -84,7 +91,7 @@ def area_field(ds, var, climate, time, area, level=None, tag=""):
 
     def fetch():
         kw = {"level": level} if level else {}
-        out = ds[var].polytope.sel(climate=climate, time=time, area=area, grid=GRID, **kw)
+        out = ds[var].polytope.sel(climate=climate, time=time, area=area, grid=grid, **kw)
         da = out[list(out.data_vars)[0]]
         drop = [d for d in da.dims if d not in ("time", "latitude", "longitude") and da.sizes[d] == 1]
         return da.squeeze(drop).load()
